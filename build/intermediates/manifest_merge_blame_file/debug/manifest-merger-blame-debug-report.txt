@@ -4,12 +4,12 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="1"
-6-->/Users/sarangyang/AndroidStudioProjects/TorangAndroid/Screens/MyReviews/screen_myreviews/src/main/AndroidManifest.xml
+6-->/Users/sarangyang/AndroidStudioProjects/MyReviewsScreenTestApp/MyReviews/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="1" />
-7-->/Users/sarangyang/AndroidStudioProjects/TorangAndroid/Screens/MyReviews/screen_myreviews/src/main/AndroidManifest.xml
+7-->/Users/sarangyang/AndroidStudioProjects/MyReviewsScreenTestApp/MyReviews/src/main/AndroidManifest.xml
 8
 9    <uses-permission android:name="android.permission.INTERNET" />
-9-->/Users/sarangyang/AndroidStudioProjects/TorangAndroid/Screens/MyReviews/screen_myreviews/src/main/AndroidManifest.xml:4:5-67
-9-->/Users/sarangyang/AndroidStudioProjects/TorangAndroid/Screens/MyReviews/screen_myreviews/src/main/AndroidManifest.xml:4:22-64
+9-->/Users/sarangyang/AndroidStudioProjects/MyReviewsScreenTestApp/MyReviews/src/main/AndroidManifest.xml:4:5-67
+9-->/Users/sarangyang/AndroidStudioProjects/MyReviewsScreenTestApp/MyReviews/src/main/AndroidManifest.xml:4:22-64
 10
 11</manifest>
