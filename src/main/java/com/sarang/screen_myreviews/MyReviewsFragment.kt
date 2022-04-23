@@ -13,6 +13,7 @@ import com.example.torang_core.*
 import com.example.torang_core.data.uistate.isEmpty
 import com.example.torang_core.navigation.LoginNavigation
 import com.example.torang_core.navigation.WriteReviewNavigation
+import com.example.torang_core.util.Logger
 import com.sarang.screen_myreviews.databinding.FragmentMyReviewsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -34,7 +35,8 @@ class MyReviewsFragment : Fragment() {
 
     @Inject
     lateinit var writeReviewNavigation: WriteReviewNavigation // 리뷰 작성 내비게이션
-    private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
+    //private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
+    private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private lateinit var myReviewRvAdt: MyReviewsRvAdt // 리뷰 리사이클러뷰 아답터
 
     override fun onCreateView(
@@ -56,6 +58,7 @@ class MyReviewsFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.myReviewUiState.collect {
+                    Logger.d("")
                     binding.isLogin = it.isLogin
                     binding.slReviews.isRefreshing = it.isLoading
                     it.list?.let { myReviewRvAdt.setItems(it) }
