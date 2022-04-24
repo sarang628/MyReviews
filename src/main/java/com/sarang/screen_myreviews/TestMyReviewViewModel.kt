@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.torang_core.data.data.MyReview
 import com.example.torang_core.data.data.ReviewAndImage
 import com.example.torang_core.data.uistate.MyReviewUiState
 import com.example.torang_core.util.Logger
@@ -22,10 +23,9 @@ class TestMyReviewViewModel @Inject constructor() : ViewModel() {
     val myReviewUiState: StateFlow<MyReviewUiState> = _myReviewUiState.asStateFlow()
 
     init {
-
         viewModelScope.launch {
             _myReviewUiState.update {
-                delay(300)
+                delay(1000)
                 it.copy(isLogin = true)
             }
         }
@@ -39,8 +39,88 @@ class TestMyReviewViewModel @Inject constructor() : ViewModel() {
 
         viewModelScope.launch {
             _myReviewUiState.update {
-                delay(300)
+                delay(1500)
                 it.copy(list = ArrayList(), isLoading = false)
+            }
+        }
+
+        viewModelScope.launch {
+            _myReviewUiState.update {
+                delay(1500)
+                it.copy(list = ArrayList<MyReview>().apply {
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                    add(
+                        MyReview(
+                            review_id = 0,
+                            rating = 3.0f,
+                            contents = "맛있어요",
+                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                        )
+                    )
+                })
             }
         }
     }
@@ -49,18 +129,16 @@ class TestMyReviewViewModel @Inject constructor() : ViewModel() {
 
     }
 
-    fun getViewReview(restaurantId: Int): LiveData<List<ReviewAndImage>> {
-        return MutableLiveData(ArrayList())
-    }
-
     fun refreshMyReviews() {
         viewModelScope.launch {
             _myReviewUiState.update {
-                it.copy(list = ArrayList(), isLoading = true)
+                delay(1000)
+                it.copy(isLoading = true)
             }
         }
         viewModelScope.launch {
             _myReviewUiState.update {
+                delay(1000)
                 it.copy(list = ArrayList(), isLoading = false)
             }
         }

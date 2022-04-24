@@ -35,6 +35,7 @@ class MyReviewsFragment : Fragment() {
 
     @Inject
     lateinit var writeReviewNavigation: WriteReviewNavigation // 리뷰 작성 내비게이션
+
     //private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private lateinit var myReviewRvAdt: MyReviewsRvAdt // 리뷰 리사이클러뷰 아답터
@@ -44,26 +45,25 @@ class MyReviewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentMyReviewsBinding.inflate(layoutInflater, container, false)
-
         myReviewRvAdt = MyReviewsRvAdt(writeReviewNavigation)
-
         binding.recyclerView2.adapter = myReviewRvAdt
+        initEvent(binding)
+        subscribeUi(binding)
+
+        requireActivity().intent?.let {
+            val restaurantId = it.getIntExtra("restaurantId", 1)
+            if (restaurantId != -1) {
+                viewModel.loadMyReviews(restaurantId)
+            }
+        }
+        return binding.root
+    }
+
+    private fun initEvent(binding: FragmentMyReviewsBinding) {
         //내 리뷰 추가 버튼 클릭
         binding.btnAddMyReview.setOnClickListener {
             requireActivity().intent?.let {
                 writeReviewNavigation.go(requireContext(), it.getIntExtra("restaurantId", -1))
-            }
-        }
-        subscribeUi(binding)
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.myReviewUiState.collect {
-                    Logger.d("")
-                    binding.isLogin = it.isLogin
-                    binding.slReviews.isRefreshing = it.isLoading
-                    it.list?.let { myReviewRvAdt.setItems(it) }
-                    binding.tvEmpty.visibility = if (it.isEmpty) View.VISIBLE else View.INVISIBLE
-                }
             }
         }
 
@@ -74,16 +74,16 @@ class MyReviewsFragment : Fragment() {
         binding.slReviews.setOnRefreshListener {
             viewModel.refreshMyReviews()
         }
-        return binding.root
     }
 
     private fun subscribeUi(binding: FragmentMyReviewsBinding) {
-        requireActivity().intent?.let {
-            val restaurantId = it.getIntExtra("restaurantId", 1)
-            if (restaurantId != -1) {
-                viewModel.loadMyReviews(restaurantId)
-                viewModel.getViewReview(restaurantId).observe(viewLifecycleOwner) {
-                    myReviewRvAdt.setReviews(it)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.myReviewUiState.collect {
+                    binding.isLogin = it.isLogin
+                    binding.slReviews.isRefreshing = it.isLoading
+                    it.list?.let { myReviewRvAdt.setItems(it) }
+                    binding.tvEmpty.visibility = if (it.isEmpty) View.VISIBLE else View.INVISIBLE
                 }
             }
         }

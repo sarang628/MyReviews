@@ -49,8 +49,6 @@ class MyReviewsViewModel @Inject constructor(
         }
     }
 
-    fun getViewReview(restaurantId: Int) = myReviewsRepository.getMyReviews1(restaurantId)
-
     fun refreshMyReviews() {
         viewModelScope.launch {
             _myReviewUiState.update {
