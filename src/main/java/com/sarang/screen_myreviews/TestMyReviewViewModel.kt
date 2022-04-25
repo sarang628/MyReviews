@@ -22,14 +22,13 @@ class TestMyReviewViewModel @Inject constructor() : ViewModel() {
     private val _myReviewUiState = MutableStateFlow(MyReviewUiState())
     val myReviewUiState: StateFlow<MyReviewUiState> = _myReviewUiState.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            _myReviewUiState.update {
-                delay(1000)
-                it.copy(isLogin = true)
-            }
-        }
+    var loading = false;
 
+    init {
+
+    }
+
+    fun loadMyReviews(restaurantId: Int) {
         viewModelScope.launch {
             _myReviewUiState.update {
                 delay(300)
@@ -37,111 +36,111 @@ class TestMyReviewViewModel @Inject constructor() : ViewModel() {
             }
         }
 
-        viewModelScope.launch {
-            _myReviewUiState.update {
-                delay(1500)
-                it.copy(list = ArrayList(), isLoading = false)
+        if (!loading)
+            viewModelScope.launch {
+                _myReviewUiState.update {
+                    delay(1000)
+                    it.copy(list = ArrayList(), isLoading = false)
+                }
             }
-        }
 
-        viewModelScope.launch {
-            _myReviewUiState.update {
-                delay(1500)
-                it.copy(list = ArrayList<MyReview>().apply {
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                    add(
-                        MyReview(
-                            review_id = 0,
-                            rating = 3.0f,
-                            contents = "맛있어요",
-                            reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
-                        )
-                    )
-                })
+        if (loading)
+            viewModelScope.launch {
+                _myReviewUiState.update {
+                    delay(1000)
+                    it.copy(
+                        isLoading = false,
+                        list = ArrayList<MyReview>().apply {
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                            add(
+                                MyReview(
+                                    review_id = 0,
+                                    rating = 3.0f,
+                                    contents = "맛있어요",
+                                    reviewImageUrl = "44/469/08:02:11.512/08:02:11.512.png"
+                                )
+                            )
+                        })
+                }
             }
-        }
+
+        loading = !loading
     }
 
-    fun loadMyReviews(restaurantId: Int) {
-
+    fun login() {
+        viewModelScope.launch {
+            _myReviewUiState.update {
+                delay(300)
+                it.copy(isLogin = true)
+            }
+        }
     }
 
     fun refreshMyReviews() {
-        viewModelScope.launch {
-            _myReviewUiState.update {
-                delay(1000)
-                it.copy(isLoading = true)
-            }
-        }
-        viewModelScope.launch {
-            _myReviewUiState.update {
-                delay(1000)
-                it.copy(list = ArrayList(), isLoading = false)
-            }
-        }
+        loadMyReviews(10)
     }
 
 }

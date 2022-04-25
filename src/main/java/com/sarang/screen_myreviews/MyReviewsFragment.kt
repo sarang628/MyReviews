@@ -36,7 +36,7 @@ class MyReviewsFragment : Fragment() {
     @Inject
     lateinit var writeReviewNavigation: WriteReviewNavigation // 리뷰 작성 내비게이션
 
-    //private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
+    //    private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private lateinit var myReviewRvAdt: MyReviewsRvAdt // 리뷰 리사이클러뷰 아답터
 
@@ -68,7 +68,8 @@ class MyReviewsFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            loginNavigation.goLogin(requireContext())
+            //loginNavigation.goLogin(requireContext())
+            viewModel.login()
         }
 
         binding.slReviews.setOnRefreshListener {
