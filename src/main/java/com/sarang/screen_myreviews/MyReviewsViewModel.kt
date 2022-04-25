@@ -7,6 +7,7 @@ import com.example.torang_core.repository.LoginRepository
 import com.example.torang_core.repository.MyReviewsRepository
 import com.example.torang_core.util.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,8 +33,6 @@ class MyReviewsViewModel @Inject constructor(
                 }
             }
         }
-
-        refreshMyReviews()
     }
 
     /**
@@ -49,16 +48,17 @@ class MyReviewsViewModel @Inject constructor(
         }
     }
 
-    fun refreshMyReviews() {
+    fun refreshMyReviews(restaurantId: Int) {
         viewModelScope.launch {
             _myReviewUiState.update {
                 it.copy(isLoading = true)
             }
-            val data = myReviewsRepository.getMyReviews3(0)
+        }
+        viewModelScope.launch {
             _myReviewUiState.update {
                 it.copy(
                     isLoading = false,
-                    list = data
+                    list = myReviewsRepository.getMyReviews3(restaurantId)
                 )
             }
         }

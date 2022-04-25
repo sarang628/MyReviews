@@ -35,9 +35,9 @@ class MyReviewsFragment : Fragment() {
 
     @Inject
     lateinit var writeReviewNavigation: WriteReviewNavigation // 리뷰 작성 내비게이션
+    private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
 
-    //    private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
-    private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
+    //    private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private lateinit var myReviewRvAdt: MyReviewsRvAdt // 리뷰 리사이클러뷰 아답터
 
     override fun onCreateView(
@@ -49,14 +49,18 @@ class MyReviewsFragment : Fragment() {
         binding.recyclerView2.adapter = myReviewRvAdt
         initEvent(binding)
         subscribeUi(binding)
+        return binding.root
+    }
 
+    private fun refreshRestaurant() {
         requireActivity().intent?.let {
             val restaurantId = it.getIntExtra("restaurantId", 1)
             if (restaurantId != -1) {
-                viewModel.loadMyReviews(restaurantId)
+                viewModel.refreshMyReviews(restaurantId)
             }
+
+            Logger.d("restaurantId = ${arguments?.get("restaurantId")}")
         }
-        return binding.root
     }
 
     private fun initEvent(binding: FragmentMyReviewsBinding) {
@@ -68,12 +72,12 @@ class MyReviewsFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            //loginNavigation.goLogin(requireContext())
-            viewModel.login()
+            loginNavigation.goLogin(requireContext())
+            //viewModel.login()
         }
 
         binding.slReviews.setOnRefreshListener {
-            viewModel.refreshMyReviews()
+            refreshRestaurant()
         }
     }
 
