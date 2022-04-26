@@ -21,12 +21,7 @@ import javax.inject.Inject
 class TestMyReviewViewModel @Inject constructor() : ViewModel() {
     private val _myReviewUiState = MutableStateFlow(MyReviewUiState())
     val myReviewUiState: StateFlow<MyReviewUiState> = _myReviewUiState.asStateFlow()
-
     var loading = false;
-
-    init {
-
-    }
 
     fun loadMyReviews(restaurantId: Int) {
         viewModelScope.launch {
@@ -139,7 +134,7 @@ class TestMyReviewViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun refreshMyReviews() {
+    fun refreshMyReviews(restaurantId: Int) {
         loadMyReviews(10)
     }
 

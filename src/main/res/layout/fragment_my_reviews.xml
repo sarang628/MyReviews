@@ -9,6 +9,10 @@
             name="isLogin"
             type="Boolean" />
 
+        <variable
+            name="isScreenLoading"
+            type="Boolean" />
+
         <import type="android.view.View" />
     </data>
 
@@ -18,80 +22,95 @@
         android:background="@color/colorSecondaryLight">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_reviews"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{isLogin ? View.VISIBLE : View.GONE}"
-            tools:context=".torangdetail.myreviews.MyReviewsFragment">
+            android:visibility="@{isScreenLoading ? View.GONE : View.VISIBLE}">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/sl_reviews"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_reviews"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/cl_my_review_container"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:visibility="@{isLogin ? View.VISIBLE : View.GONE}"
+                tools:context=".torangdetail.myreviews.MyReviewsFragment">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/sl_reviews"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/cl_my_review_container"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView2"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:text="Hello"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toTopOf="@+id/rl_btn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_my_review" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <RelativeLayout
-                        android:id="@+id/rl_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView2"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="Hello"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toTopOf="@+id/rl_btn"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:listitem="@layout/item_my_review" />
 
-                        <Button
-                            android:id="@+id/btn_add_my_review"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@null"
-                            android:text="add myreview"
-                            android:textColor="@color/colorPrimaryLight" />
-                    </RelativeLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
 
-            <FrameLayout
-                android:id="@+id/cl_my_review_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                            <Button
+                                android:id="@+id/btn_add_my_review"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:background="@null"
+                                android:text="add myreview"
+                                android:textColor="@color/colorPrimaryLight" />
+                        </RelativeLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+                <FrameLayout
+                    android:id="@+id/cl_my_review_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인해주세요"
+                android:visibility="@{isLogin ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성한 리뷰가 없습니다."
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/btn_login"
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인해주세요"
-            android:visibility="@{isLogin ? View.GONE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="작성한 리뷰가 없습니다."
-            android:visibility="invisible"
+            android:visibility="@{isScreenLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

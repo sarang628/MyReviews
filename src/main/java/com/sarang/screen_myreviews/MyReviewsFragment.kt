@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.torang_core.*
 import com.example.torang_core.data.uistate.isEmpty
+import com.example.torang_core.data.uistate.isScreenLoading
 import com.example.torang_core.navigation.LoginNavigation
 import com.example.torang_core.navigation.WriteReviewNavigation
 import com.example.torang_core.util.Logger
@@ -37,7 +38,7 @@ class MyReviewsFragment : Fragment() {
     lateinit var writeReviewNavigation: WriteReviewNavigation // 리뷰 작성 내비게이션
     private val viewModel: MyReviewsViewModel by viewModels() // 리뷰 리스트 뷰 모델
 
-    //    private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
+//    private val viewModel: TestMyReviewViewModel by viewModels() // 리뷰 리스트 뷰 모델
     private lateinit var myReviewRvAdt: MyReviewsRvAdt // 리뷰 리사이클러뷰 아답터
 
     override fun onCreateView(
@@ -58,8 +59,6 @@ class MyReviewsFragment : Fragment() {
             if (restaurantId != -1) {
                 viewModel.refreshMyReviews(restaurantId)
             }
-
-            Logger.d("restaurantId = ${arguments?.get("restaurantId")}")
         }
     }
 
@@ -89,6 +88,7 @@ class MyReviewsFragment : Fragment() {
                     binding.slReviews.isRefreshing = it.isLoading
                     it.list?.let { myReviewRvAdt.setItems(it) }
                     binding.tvEmpty.visibility = if (it.isEmpty) View.VISIBLE else View.INVISIBLE
+                    binding.isScreenLoading = it.isScreenLoading
                 }
             }
         }
