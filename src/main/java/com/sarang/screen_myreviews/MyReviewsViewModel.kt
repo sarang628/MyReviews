@@ -18,11 +18,8 @@ class MyReviewsViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) :
     ViewModel() {
-
     private val _myReviewUiState = MutableStateFlow(MyReviewUiState())
     val myReviewUiState: StateFlow<MyReviewUiState> = _myReviewUiState.asStateFlow()
-
-    val myReviewItemsUiState = myReviewsRepository.getMyReviews2(0)
 
     init {
         viewModelScope.launch {
@@ -35,23 +32,10 @@ class MyReviewsViewModel @Inject constructor(
         }
     }
 
-    /**
-     * 내 리뷰 불러오기
-     */
-    fun loadMyReviews(restaurantId: Int) {
-        viewModelScope.launch {
-            try {
-                myReviewsRepository.getMyReviews(restaurantId)
-            } catch (e: Exception) {
-                Logger.e(e.toString())
-            }
-        }
-    }
-
     fun refreshMyReviews(restaurantId: Int) {
         viewModelScope.launch {
             _myReviewUiState.update {
-                it.copy(isLoading = true)
+                it.copy(isLoading = true, isfirstLoading = true)
             }
         }
         viewModelScope.launch {
