@@ -2,10 +2,8 @@ package com.sarang.screen_myreviews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.torang_core.data.uistate.MyReviewUiState
 import com.example.torang_core.repository.LoginRepository
 import com.example.torang_core.repository.MyReviewsRepository
-import com.example.torang_core.util.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*

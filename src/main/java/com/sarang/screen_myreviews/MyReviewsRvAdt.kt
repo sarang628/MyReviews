@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.torang_core.data.data.MyReview
 import com.example.torang_core.data.data.ReviewAndImage
-import com.example.torang_core.data.uistate.MyReviewItemUiState
 import com.example.torang_core.navigation.WriteReviewNavigation
 import com.sarang.screen_myreviews.MyReviewsVH.Companion.create
 

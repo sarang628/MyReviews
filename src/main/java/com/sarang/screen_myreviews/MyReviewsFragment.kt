@@ -10,12 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.torang_core.*
-import com.example.torang_core.data.uistate.firstLoadingDate
-import com.example.torang_core.data.uistate.isEmpty
-import com.example.torang_core.data.uistate.isScreenLoading
 import com.example.torang_core.navigation.LoginNavigation
 import com.example.torang_core.navigation.WriteReviewNavigation
-import com.example.torang_core.util.Logger
 import com.sarang.screen_myreviews.databinding.FragmentMyReviewsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -29,6 +25,7 @@ import javax.inject.Inject
  * [ItemMyReviewBinding]
  * [FragmentMyReviewsBinding]
  * [MyReviewsViewModel] - ViewModel
+ * [MyReviewUiState] - UiState
  */
 
 @AndroidEntryPoint
@@ -86,7 +83,10 @@ class MyReviewsFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.myReviewUiState.collect {
-                    binding.isLogin = it.isLogin
+                    it.isLogin?.let {
+                        binding.btnLogin.visibility = if (it) View.INVISIBLE else View.VISIBLE
+                        binding.clReviews.visibility = if (it) View.VISIBLE else View.INVISIBLE
+                    }
                     binding.slReviews.isRefreshing = it.isLoading
                     it.list?.let { myReviewRvAdt.setItems(it) }
                     binding.tvEmpty.visibility = if (it.isEmpty) View.VISIBLE else View.INVISIBLE

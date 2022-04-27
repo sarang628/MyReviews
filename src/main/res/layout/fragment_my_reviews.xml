@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="isLogin"
-            type="Boolean" />
-
-        <variable
             name="isScreenLoading"
             type="Boolean" />
 
@@ -30,7 +26,7 @@
                 android:id="@+id/cl_reviews"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{isLogin ? View.VISIBLE : View.GONE}"
+                android:visibility="invisible"
                 tools:context=".torangdetail.myreviews.MyReviewsFragment">
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -89,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="로그인해주세요"
-                android:visibility="@{isLogin ? View.GONE : View.VISIBLE}"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
