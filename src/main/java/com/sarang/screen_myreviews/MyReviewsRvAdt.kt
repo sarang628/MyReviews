@@ -7,7 +7,7 @@ import com.example.torang_core.data.data.ReviewAndImage
 import com.example.torang_core.navigation.WriteReviewNavigation
 import com.sarang.screen_myreviews.MyReviewsVH.Companion.create
 
-class MyReviewsRvAdt constructor(val writeReviewNavigation: WriteReviewNavigation) : RecyclerView.Adapter<MyReviewsVH>() {
+class MyReviewsRvAdt constructor(private val writeReviewNavigation: WriteReviewNavigation) : RecyclerView.Adapter<MyReviewsVH>() {
     private var reviews: MutableList<ReviewAndImage> = ArrayList()
     private var items : List<MyReview> = ArrayList()
     private fun deleteReview(review: ReviewAndImage) {
